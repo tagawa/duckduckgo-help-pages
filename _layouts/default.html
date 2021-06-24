@@ -73,13 +73,10 @@
             
             <hr>
             <small>
-                Published Mar 8, 2016. Last edited Jun 18, 2021.
-                Prior versions on <a href="https://github.com/duckduckgo/duckduckgo-help-pages/commits/master/{{ page.path }}">GitHub</a>.
+                Published <span id="date-created"></span> Mar 8, 2016. Last edited <span id="date-last-modified"></span> Jun 18, 2021.
+                Prior versions on <a href="https://github.com/{{ site.github.owner_name }}/{{ site.github.repository_name }}/commits/master/{{ page.path }}">GitHub</a>.
                 Last modified: <div id="last-modified"></div>
             </small>
-            GH Owner Name: <br/>
-            GH Repo Name: <br/>
-            URL name: https://github.com/{{ site.github.owner_name }}/{{ site.github.repository_name }}/commits/master/{{ page.path }}
         </article>
 
         <footer class="footer">
@@ -110,7 +107,10 @@
                     return response.json();
                 })
                 .then((commits) => {
-                    var modified = commits[0]['commit']['committer']['date'].slice(0,10);
+                    var created = commits[commits.length - 1]['commit']['committer']['date'].slice(0, 10);
+                    var modified = commits[0]['commit']['committer']['date'].slice(0, 10);
+                    document.getElementById('date-created').textContent = created;
+                    document.getElementById('date-last-modified').textContent = modified;
                     console.log(commits);
                     if(modified != "{{ page.date | date: "%Y-%m-%d" }}") {
                         document.getElementById('last-modified').textContent = "Last Modified: " + modified;
