@@ -75,12 +75,8 @@
             <small>
                 Published Mar 8, 2016. Last edited Jun 18, 2021.
                 Prior versions on <a href="https://github.com/duckduckgo/duckduckgo-help-pages/commits/master/{{ page.path }}">GitHub</a>.
+                Last modified: <div id="last-modified"></div>
             </small>
-            <br/>
-            Date: {{ page.date }}<br/>
-            Date2: {{ post.date }}<br/>
-            Date3: {{ page.date | date:"%Y-%m" }} <br/>
-            
         </article>
 
         <footer class="footer">
@@ -104,6 +100,21 @@
         document.getElementById("open-nav").addEventListener("click", function () {
             document.body.classList.toggle("nav-open");
         });
+        
+        if (window.fetch) {function setModifiedDate() {
+            if (document.getElementById('last-modified')) {
+                fetch("https://api.github.com/repos/{{ site.github.owner_name }}/{{ site.github.repository_name }}/commits?path={{ page.path }}")
+                    .then((response) => {
+                    return response.json();
+                    })
+                .then((commits) => {
+                    var modified = commits[0]['commit']['committer']['date'].slice(0,10);
+                    if(modified != "{{ page.date | date: "%Y-%m-%d" }}") {
+                        document.getElementById('last-modified').textContent = "Last Modified: " + modified;
+                    }
+                });
+            }
+        }
     </script>
 </body>
 
