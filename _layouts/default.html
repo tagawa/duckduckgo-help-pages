@@ -77,6 +77,9 @@
                 Prior versions on <a href="https://github.com/duckduckgo/duckduckgo-help-pages/commits/master/{{ page.path }}">GitHub</a>.
                 Last modified: <div id="last-modified"></div>
             </small>
+            GH Owner Name: <br/>
+            GH Repo Name: <br/>
+            URL name: https://github.com/{{ site.github.owner_name }}/{{ site.github.repository_name }}/commits/master/{{ page.path }}
         </article>
 
         <footer class="footer">
@@ -105,9 +108,10 @@
             fetch("https://api.github.com/repos/{{ site.github.owner_name }}/{{ site.github.repository_name }}/commits?path={{ page.path }}")
                 .then((response) => {
                     return response.json();
-                    })
+                })
                 .then((commits) => {
                     var modified = commits[0]['commit']['committer']['date'].slice(0,10);
+                    console.log(commits);
                     if(modified != "{{ page.date | date: "%Y-%m-%d" }}") {
                         document.getElementById('last-modified').textContent = "Last Modified: " + modified;
                 }
