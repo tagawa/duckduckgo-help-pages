@@ -73,7 +73,7 @@
             
             <hr>
             <small>
-                Published <span id="date-created"></span>. Last edited <span id="date-last-modified"></span>.
+                <span id="page-dates"></span>
                 Prior versions on <a href="https://github.com/{{ site.github.owner_name }}/{{ site.github.repository_name }}/commits/master/{{ page.path }}">GitHub</a>.
             </small>
         </article>
@@ -100,7 +100,7 @@
             document.body.classList.toggle("nav-open");
         });
         
-        if (window.fetch && document.getElementById('date-created') && document.getElementById('date-last-modified')) {
+        if (window.fetch && document.getElementById('page-dates')) {
             fetch("https://api.github.com/repos/{{ site.github.owner_name }}/{{ site.github.repository_name }}/commits?path={{ page.path }}")
                 .then((response) => {
                     return response.json();
@@ -108,12 +108,11 @@
                 .then((commits) => {
                     var created_string = commits[commits.length - 1]['commit']['committer']['date'];
                     var created_date = new Date(created_string).toDateString();
-                
+                    
                     var modified_string = commits[0]['commit']['committer']['date'];
                     var modified_date = new Date(modified_string).toDateString();
-                
-                    document.getElementById('date-created').textContent = created_date;
-                    document.getElementById('date-last-modified').textContent = modified;
+                    
+                    document.getElementById('page-dates').textContent = 'Published ' + created_date + '. Last edited ' + modified_date + '.';
                 });
         }
     </script>
