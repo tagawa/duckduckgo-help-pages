@@ -107,9 +107,12 @@
                     return response.json();
                 })
                 .then((commits) => {
-                    var created = commits[commits.length - 1]['commit']['committer']['date'].slice(0, 10);
+                    var created_string = commits[commits.length - 1]['commit']['committer']['date'];
+                    var created_date = new Date(created_string).toDateString(); //return YYYY-MM-DD
+                
+                
                     var modified = commits[0]['commit']['committer']['date'].slice(0, 10);
-                    document.getElementById('date-created').textContent = created;
+                    document.getElementById('date-created').textContent = created_date;
                     document.getElementById('date-last-modified').textContent = modified;
                     console.log(commits);
                     if(modified != "{{ page.date | date: "%Y-%m-%d" }}") {
