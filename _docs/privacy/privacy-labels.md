@@ -17,3 +17,15 @@ You can use the DuckDuckGo app knowing that no personal data is being collected 
 It's important to be aware that even two apps that share the same data privacy label may have different levels of privacy protection under the surface. So our long-standing advice remains: Only install apps from companies and developers that you truly trust, and remove those that you don't use, to reduce your digital footprint.
 
 You can get more tips in our [privacy newsletters](https://duckduckgo.com/newsletter), and if you have any concerns, please feel free to reach out to us directly at [privacy@duckduckgo.com](mailto:privacy@duckduckgo.com).
+
+[test 1](../company/contact-us)
+
+[test 2](../company/contact-us.md)
+
+[test 3](/_docs/company/contact-us)
+
+[test 4](/_docs/company/contact-us.md)
+
+[test 5](/company/contact-us)
+
+[test 6](/company/contact-us.md)
